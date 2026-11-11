@@ -1,0 +1,17 @@
+Package: ros-lyrical-robotiq-2f-urcap-adapter
+Architecture: amd64
+Version: 0-2026.11.11.18.16
+Priority: optional
+Section: misc
+Maintainer: "David Oberacker" <oberacker@fzi.de>
+Installed-Size: 100
+Depends: ros-lyrical-control-msgs, ros-lyrical-rclpy
+Filename: ./ros-lyrical-robotiq-2f-urcap-adapter_0-2026.11.11.18.16_amd64.deb
+Size: 13324
+MD5sum: 9173c4e512595eed8aa112ac24910a63
+SHA1: f933f2e1cf5a65f300e1bc051dde7a9f701087cd
+SHA256: 6b91bb89e82e2526628385b182c8608c9d4ee06d24a2c575a778b6efac84a736
+SHA512: 2eed1d9d405c176d2c6490f8940390dbcd9cb36e16777202bca6cff3435e64b32088f27bebcccd2b3175cf6f8a382204293767f9a5060951087a2ce505eb0e29
+Homepage: https://index.ros.org/p/robotiq_2f_urcap_adapter/#lyrical
+Description: Direct control interface to the Robotiq 2F gripper URCap via Socket and String Commands
+
