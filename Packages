@@ -1,0 +1,17 @@
+Package: ros-jazzy-robotiq-2f-urcap-adapter
+Architecture: amd64
+Version: 0-2026.11.11.18.16
+Priority: optional
+Section: misc
+Maintainer: "David Oberacker" <oberacker@fzi.de>
+Installed-Size: 97
+Depends: ros-jazzy-control-msgs, ros-jazzy-rclpy
+Filename: ./ros-jazzy-robotiq-2f-urcap-adapter_0-2026.11.11.18.16_amd64.deb
+Size: 12970
+MD5sum: fc82a00e70d8d04945ae3265f13e291f
+SHA1: 04ea4ffe14f46e0a6f2455db734f6dde17787ea5
+SHA256: 8297073355031e49061d4dbbfd185137b8936b6112e622c2f49115574b01713e
+SHA512: 15196637434e7e06b6e8e2e3640ef569cfd4df5c8f490f7628b9004364b5f4a117bbaf9599e928a12639b506fd00aae83da70c4aa70bbfc5b28fefafec57e6af
+Homepage: https://index.ros.org/p/robotiq_2f_urcap_adapter/#jazzy
+Description: Direct control interface to the Robotiq 2F gripper URCap via Socket and String Commands
+
