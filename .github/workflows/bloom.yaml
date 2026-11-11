@@ -3,7 +3,7 @@ name: Bloom Debian Package
 on:
   push:
     branches:
-      main
+      bloom
     paths-ignore:
       - "README.md"
   pull_request:
