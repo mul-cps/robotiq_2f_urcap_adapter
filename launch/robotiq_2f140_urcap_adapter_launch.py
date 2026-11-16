@@ -47,7 +47,12 @@ def generate_launch_description():
                 "min_gripper_speed": 0.03,
                 "max_gripper_force": 125.0,
                 "min_gripper_force": 10.0,
-            }]
+                "joint_name": "finger_joint",
+                "joint_range": 0.7,
+            }],
+            remappings=[
+                ('~/joint_states', '/joint_states'),
+            ],
         )
     return LaunchDescription([
         robot_ip_launch_arg,

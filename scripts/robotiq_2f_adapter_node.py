@@ -31,6 +31,7 @@ from rclpy.node import Node, ParameterDescriptor, ParameterType,\
     ParameterNotDeclaredException, ParameterUninitializedException
 
 from control_msgs.action import GripperCommand as GripperCommandAction
+from sensor_msgs.msg import JointState
 
 from robotiq_2f_urcap_adapter_socket.robotiq_2f_socket_adapter import ObjectStatus
 from robotiq_2f_urcap_adapter_socket.robotiq_2f_socket_adapter import Robotiq2fSocketAdapter
@@ -49,6 +50,10 @@ class Robotiq2fAdapterNode(Node):
             GripperCommandAction,
             "~/gripper_command",
             self.execute_callback
+        )
+
+        self._joint_state_publisher = self.create_publisher(
+            JointState, "~/joint_states", 10
         )
 
         self.declare_parameter(
@@ -123,6 +128,24 @@ class Robotiq2fAdapterNode(Node):
                 description="Minimum effort (N) which the gripper excert."
             )
         )
+        self.gripper_joint_name = self.declare_parameter(
+            name="joint_name",
+            value="finger_joint",
+            descriptor=ParameterDescriptor(
+                name="joint_name",
+                type=ParameterType.PARAMETER_STRING,
+                description="name of controllable gripper joint"
+            )
+        ).value
+        self.gripper_joint_range = self.declare_parameter(
+            name="joint_range",
+            value=0.0,
+            descriptor=ParameterDescriptor(
+                name="joint_range",
+                type=ParameterType.PARAMETER_DOUBLE,
+                description="Joint position range (rad) corresponding to the full gripper range."
+            )
+        ).value
 
         try:
 
@@ -200,6 +223,22 @@ class Robotiq2fAdapterNode(Node):
         self._normalized_speed_baseline = min_gripper_speed_m_s
 
         self._gripper_speed_m_s = max_gripper_speed_m_s
+
+        self._joint_state_timer = self.create_timer(0.1, self._publish_joint_state)
+
+    def _publish_joint_state(self):
+        """Publish the current gripper width as a joint state."""
+        joint_state = JointState()
+        joint_state.header.stamp = self.get_clock().now().to_msg()
+        joint_state.name = [self.gripper_joint_name]
+        joint_state.position = [
+            (self.gripper_adapter.position / 255.0) * self.gripper_joint_range
+        ]
+        joint_state.effort = [
+            self.__newton_value_from_normalized_effort(self.gripper_adapter.force)
+        ]
+
+        self._joint_state_publisher.publish(joint_state)
 
     def __newton_value_from_normalized_effort(self, normalized_value: int) -> float:
         """
