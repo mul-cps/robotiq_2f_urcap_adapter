@@ -35,9 +35,8 @@ def generate_launch_description():
 
     robotiq_2f_urcap_adapter_node = Node(
             package='robotiq_2f_urcap_adapter',
-            namespace='robotiq_2f140_urcap_adapter',
             executable='robotiq_2f_adapter_node.py',
-            name='robotiq_2f85_urcap_adapter',
+            name='robotiq_urcap_adapter',
             parameters=[{
                 "robot_ip": LaunchConfiguration('robot_ip'),
                 "robot_port": LaunchConfiguration('robot_port'),
