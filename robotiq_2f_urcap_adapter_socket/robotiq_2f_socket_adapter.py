@@ -41,6 +41,7 @@ class GripperStatus(Enum):
     ACTIVATING = 1
     # UNUSED = 2  # This value is currently not used by the gripper firmware
     ACTIVE = 3
+    UNKNOWN = '?'
 
 
 class ObjectStatus(Enum):
@@ -181,8 +182,10 @@ class Robotiq2fSocketAdapter:
                 f"Unexpected response {data} ({data.decode(self.ENCODING)}): "
                 f"does not match '{variable}'"
                 )
-        value = int(value_str)
-        return value
+        if value_str == '?':
+            return value_str
+        else:
+            return int(value_str)
 
     def _is_ack(self, data: bytes) -> bool:
         """
