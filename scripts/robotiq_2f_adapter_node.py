@@ -543,6 +543,8 @@ def main(args=None):
 
     try:
         executor.spin()
+    except KeyboardInterrupt:
+        pass
     finally:
         gripper_control_adapter.disconnect()
         gripper_control_adapter.destroy_node()
