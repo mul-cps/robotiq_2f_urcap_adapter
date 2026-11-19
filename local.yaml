@@ -1,0 +1,3 @@
+robotiq_2f_urcap_adapter:
+  ubuntu:
+  - ros-lyrical-robotiq-2f-urcap-adapter
